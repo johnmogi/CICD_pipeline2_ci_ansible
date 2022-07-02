@@ -18,3 +18,10 @@
         dest: /home/adminuser/weightapp
         clone: yes
         update: no
+    # raise app
+    - name: connect to db and run app
+      shell: |
+        cd /home/adminuser/weightapp
+        npm install
+        npm run initdb
+        npm run dev
