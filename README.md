@@ -1,5 +1,7 @@
 # CICD_pipeline2_ci_ansible
 
+renamed master to main
+
 list repos:
 this = https://github.com/johnmogi/CICD_pipeline1_IAc_plan-files
 
