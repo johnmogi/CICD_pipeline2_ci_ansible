@@ -12,7 +12,6 @@ pool:
 steps:
   - script: |
       echo '''
-          - bash: |
         PORT: $(PORT)
         HOST: $(HOST)
         HOST_URL: $(HOST_URL)
