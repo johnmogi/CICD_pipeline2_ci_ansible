@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: true
+  vars_files:
+    - psecret.yml
+  tasks:
+    - name: update apt repositories
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+    - name: node14 setup
+      shell: "curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash - && sudo apt-get install -y nodejs"
+      args:
+        warn: false
+
+    - name: clone Weight tracker from git
+      git:
+        repo: https://github.com/johnmogi/bootcamp-app.git
+        dest: /home/adminuser/weightapp
+        clone: yes
+        update: no
