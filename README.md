@@ -3,6 +3,16 @@
 list repos:
 this = https://github.com/johnmogi/CICD_pipeline1_IAc_plan-files
 
+make sure to add hosts file
+
+[PROD]
+prodvm1 ansible_host=<subnet> ansible_port=<port> ansible_user=<user> ansible_password=<pass>
+prodvm2 ansible_host=<subnet> ansible_port=<port> ansible_user=<user> ansible_password=<pass>
+prodvm3 ansible_host=<subnet> ansible_port=<port> ansible_user=<user> ansible_password=<pass>
+[STAG]
+stagvm1 ansible_host=<subnet> ansible_port=<port> ansible_user=<user> ansible_password=<pass>
+stagvm1 ansible_host=<subnet> ansible_port=<port> ansible_user=<user> ansible_password=<pass>
+
 PROJECT
 Introduction
 For the last few weeks we have been using terraform to provision the infrastructure of our application and we are using ansible to automate the deployment process, which is quite respectable but not enough. This week we will finish automating the entire process by using CI/CD methodologies to orchestrate the use of both tools and deploy the changes made to the code continuously and automatically.
