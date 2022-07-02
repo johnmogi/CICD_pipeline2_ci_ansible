@@ -14,7 +14,7 @@
 
     - name: clone Weight tracker from git
       git:
-        repo: https://github.com/johnmogi/bootcamp-app.git
+        repo: https://github.com/johnmogi/CICD_pipeline3_frontend.git
         dest: /home/adminuser/weightapp
         clone: yes
         update: no

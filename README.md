@@ -69,6 +69,11 @@ ansible-playbook play.yml
 will run over the required steps tp install application configuration over your server fleet.
 I hope you enjoy the experience.
 
+automation issue tracker
+moving ansible to base path dir - succeded?
+
+<pre>
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adminuser/.local/bin:/home/adminuser/.local/bin/ansible:/home/adminuser/.local/bin/ansible
 
 /home/adminuser/.local/bin:/home/adminuser/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+</pre>
