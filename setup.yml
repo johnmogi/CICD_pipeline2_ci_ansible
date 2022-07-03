@@ -38,7 +38,7 @@
 
     - name: build dir
       file:
-        path: /home/adminuser/weightapp
+        path: /home/adminuser/weightapp/
         state: directory
 
     - name: extract app.tar
