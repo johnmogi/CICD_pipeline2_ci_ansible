@@ -4,7 +4,7 @@ trigger:
     include:
       - main
 variables:
-- group: staging
+  - group: staging
 pool:
   name: terraform_to_ci_cd
   vmImage: "CI"
@@ -36,9 +36,9 @@ steps:
 
   - task: UniversalPackages@0
     inputs:
-      command: 'publish'
-      publishDirectory: '$(Build.ArtifactStagingDirectory)'
-      feedsToUsePublish: 'internal'
-      vstsFeedPublish: 'f3be00d4-d77a-40e2-a0a4-997840fa8608'
-      vstsFeedPackagePublish: 'ci'
-      versionOption: 'patch'
+      command: "publish"
+      publishDirectory: "$(Build.ArtifactStagingDirectory)"
+      feedsToUsePublish: "internal"
+      vstsFeedPublish: "f3be00d4-d77a-40e2-a0a4-997840fa8608"
+      vstsFeedPackagePublish: "ci"
+      versionOption: "patch"
