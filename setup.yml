@@ -12,16 +12,95 @@
       args:
         warn: false
 
-    - name: clone Weight tracker from git
-      git:
-        repo: https://github.com/johnmogi/CICD_pipeline3_frontend.git
+    - name: bring artifact to vms
+      ansible.builtin.copy:
+        src: /home/adminuser/ansible/psecret.yml
         dest: /home/adminuser/weightapp
-        clone: yes
-        update: no
-    # raise app
-    - name: connect to db and run app
-      shell: |
-        cd /home/adminuser/weightapp
-        npm install
-        npm run initdb
-        npm run dev
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: bring artifact to vms
+      ansible.builtin.copy:
+        src: /home/adminuser/app.tar
+        dest: /home/adminuser/
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: bring artifact to vms
+      ansible.builtin.copy:
+        src: /home/adminuser/app.tar
+        dest: /home/adminuser/
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: build dir
+      file:
+        path: /home/adminuser/weightapp
+        state: directory
+
+    - name: extract app.tar
+      unarchive:
+        src: /home/adminuser/app.tar
+        dest: /home/adminuser/weightapp
+        remote_src: true
+        validate_certs: true
+
+    - name: Create env file and populate it with vars
+      copy:
+        dest: "/home/adminuser/weightapp/.env"
+        content: |
+          PORT=8080
+          HOST='0.0.0.0'
+          HOST_URL= {{ HOST_URL }}
+          COOKIE_ENCRYPT_PWD={{ COOKIE_ENCRYPT_PWD }}
+          NODE_ENV={{ NODE_ENV }}
+          PGHOST={{ PGHOST }}
+          PGUSERNAME={{ PGUSERNAME }}
+          PGDATABASE={{ PGDATABASE }}
+          PGPASSWORD={{ PGPASSWORD }}
+          PGPORT={{ PGPORT }}
+          OKTA_ORG_URL={{ OKTA_ORG_URL }}
+          OKTA_CLIENT_ID={{ OKTA_CLIENT_ID }}
+          OKTA_CLIENT_SECRET={{ OKTA_CLIENT_SECRET }}
+
+    - name: make
+      command: npm run initdb
+      run_once: true
+      args:
+        chdir: /home/adminuser/weightapp
+
+    - name: Install pm2
+      npm:
+        name: pm2
+        global: yes
+
+    - name: clean old pm2
+      shell: pm2 startup
+      ignore_errors: yes
+
+    - name: starting the state of pm2
+      command: env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u adminuser --hp /home/adminuser
+      run_once: true
+      args:
+        chdir: /home/adminuser/weightapp
+
+    - name: clean old pm2
+      shell: pm2 delete all
+      ignore_errors: yes
+
+    - name: spawn app
+      shell: pm2 start src/index.js
+      args:
+        chdir: /home/adminuser/weightapp/
+
+    - name: saving the state of pm2
+      shell: pm2 save
+      args:
+        chdir: /home/adminuser/weightapp/
+
+    # - name: restart
+    #   become: yes
+    #   command: reboot
