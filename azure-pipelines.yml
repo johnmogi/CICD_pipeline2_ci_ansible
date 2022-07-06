@@ -18,7 +18,7 @@ stages:
     workspace: 
       clean: all
     steps:
-    - template: ci.yml
+    - template: setup.yml
 
 
 
@@ -35,4 +35,4 @@ stages:
       runOnce:
         deploy:
           steps:
-          - template: cd.yml
+          - template: setup.yml
