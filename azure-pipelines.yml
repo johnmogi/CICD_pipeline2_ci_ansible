@@ -14,39 +14,23 @@ stages:
 # Continuous Integration Process
 - stage: CI
   jobs:
-  - job: BuildAndPushDocker
-    workspace: 
-      clean: all
-    steps:
-  - script: |
-       echo '''
-        PORT: $(PORT)
-        HOST: $(HOST)
-        HOST_URL: $(HOST_URL)
-        COOKIE_ENCRYPT_PWD: $(COOKIE_ENCRYPT_PWD)
-        NODE_ENV: $(NODE_ENV)
-        OKTA_ORG_URL: $(OKTA_ORG_URL)
-        OKTA_CLIENT_ID: $(OKTA_CLIENT_ID)
-        OKTA_CLIENT_SECRET: $(OKTA_CLIENT_SECRET)
-        PGHOST: $(PGHOST)
-        PGUSERNAME: $(PGUSERNAME)
-        PGDATABASE: $(PGDATABASE)
-        PGPASSWORD: $(PGPASSWORD)
-        PGPORT: $(PGPORT)
-        ''' > psecret.yml
-  name: ubuntu
-  vmImage: "terraformAgent"
+        - job: Deploy
+          displayName: Deploy
+        - deployment: VMDeploy
+          displayName: web
+          variables:
+          - group: Production
 
-  - task: UniversalPackages@0
-    inputs:
-      command: "publish"
-      publishDirectory: "$(Build.ArtifactStagingDirectory)"
-      feedsToUsePublish: "internal"
-      vstsFeedPublish: "f3be00d4-d77a-40e2-a0a4-997840fa8608"
-      vstsFeedPackagePublish: "ci"
-      versionOption: "patch"
-      
-      - template: ci.yml
+          environment:
+            name:  'Production' #ApprovalRequired
+            resourceType: VirtualMachine
+            tags: 'Production'
+          strategy:
+          # default deployment strategy
+            runOnce:
+              deploy:
+                steps:
+                - template: ci.yml
 
 
 
