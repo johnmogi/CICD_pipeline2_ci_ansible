@@ -15,8 +15,6 @@ steps:
         PGPASSWORD: $(PGPASSWORD)
         PGPORT: $(PGPORT)
         ''' > psecret.yml
-  name: ubuntu
-  vmImage: "terraformAgent"
 
   - task: UniversalPackages@0
     inputs:
