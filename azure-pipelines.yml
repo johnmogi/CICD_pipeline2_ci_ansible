@@ -5,7 +5,7 @@ trigger:
       - main
       - feature/*
 pool:
-  name: Default
+  name: ubuntu
   vmImage: "terraformAgent"
 
 stages:
