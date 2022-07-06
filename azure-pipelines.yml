@@ -33,13 +33,10 @@ stages:
 - stage: Deploy_to_Production
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
   jobs:
-        - job: Deploy
-          displayName: Deploy
-        - deployment: VMDeploy
-          displayName: web
+        - deployment: production
+          displayName: Deploy to Production
           variables:
           - group: Production
-
           environment:
             name:  'Production' #ApprovalRequired
             resourceType: VirtualMachine
