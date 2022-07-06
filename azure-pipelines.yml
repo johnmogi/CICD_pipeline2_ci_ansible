@@ -6,7 +6,7 @@ trigger:
 variables:
   - group: staging
 pool:
-  name: TERRAFORM_MASTER
+  name: Default
   vmImage: "terraformAgent"
 
 steps:
