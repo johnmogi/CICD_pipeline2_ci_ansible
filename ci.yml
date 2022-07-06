@@ -1,10 +1,16 @@
 steps:
+- task: CopyFiles@2
+  inputs:
+      SourceFolder: "$(Build.SourcesDirectory)"
+      Contents: "**/**"
+      TargetFolder: "$(build.artifactstagingdirectory)"
+  displayName: "prepare artifacts"
 
-  - task: UniversalPackages@0
-    inputs:
-      command: "publish"
-      publishDirectory: "$(Build.ArtifactStagingDirectory)"
-      feedsToUsePublish: "internal"
-      vstsFeedPublish: "f3be00d4-d77a-40e2-a0a4-997840fa8608"
-      vstsFeedPackagePublish: "ci"
-      versionOption: "patch" 
+- task: UniversalPackages@0
+  inputs:
+    command: 'publish'
+    publishDirectory: '$(Build.ArtifactStagingDirectory)'
+    feedsToUsePublish: 'internal'
+    vstsFeedPublish: 'f3be00d4-d77a-40e2-a0a4-997840fa8608'
+    vstsFeedPackagePublish: 'ci'
+    versionOption: 'patch'
