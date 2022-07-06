@@ -3,4 +3,4 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      echo 'building a new ci' > ci
+      echo 'building a new ci' > ci 
