@@ -32,8 +32,7 @@ stages:
                 steps:
                 - template: ci.yml
 
-
-
+# Continuous Delivery Process
 - stage: Deploy_to_Production
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
   jobs:
