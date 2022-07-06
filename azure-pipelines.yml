@@ -13,18 +13,19 @@ pool:
 stages:
 # Continuous Integration Process
 - stage: CI
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
   jobs:
         - job: Deploy
           displayName: Deploy
         - deployment: VMDeploy
           displayName: web
           variables:
-          - group: Production
+          - group: staging
 
           environment:
-            name:  'Production' #ApprovalRequired
+            name:  'staging' 
             resourceType: VirtualMachine
-            tags: 'Production'
+            tags: 'staging'
           strategy:
           # default deployment strategy
             runOnce:
