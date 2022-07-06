@@ -4,8 +4,6 @@ trigger:
     include:
       - main
       - feature/*
-variables:
-  - group: staging
 pool:
   name: Default
   vmImage: "terraformAgent"
@@ -18,33 +16,21 @@ stages:
     workspace: 
       clean: all
     steps:
-#    - template: setup.yml
-    - task: CmdLine@2
-      inputs:
-        script: |
-          echo Write your commands here
-          
-          echo Hello world
+      - template: ci.yml
 
 
 
-# Continuous Deployment Process for Staging Environment
-- stage: DeployToStaging
+# Continuous Deployment Process for Production Environment
+- stage: DeployToProd
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
   jobs:
-  - deployment: staging
-    displayName: Deploy to Staging
+  - deployment: production
+    displayName: Deploy to Production
     environment:
-      name: staging
+      name: production
       resourceType: VirtualMachine
     strategy:
       runOnce:
         deploy:
           steps:
-#          - template: setup.yml
-          - task: CmdLine@2
-            inputs:
-              script: |
-                echo Write your commands here
-                
-                echo Hello world
+      - template: cd.yml
