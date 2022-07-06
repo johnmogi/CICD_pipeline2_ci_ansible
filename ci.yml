@@ -1,5 +1,3 @@
-variables:
-  - group: staging
 steps:
     - name: build dir
       file:

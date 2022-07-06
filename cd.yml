@@ -1,5 +1,3 @@
-variables:
-  - group: production
 steps:
     - name: build dir
       file:
