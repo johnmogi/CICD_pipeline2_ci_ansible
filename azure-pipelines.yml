@@ -3,6 +3,7 @@ trigger:
   branches:
     include:
       - main
+      - feature/*
 variables:
   - group: staging
 pool:
@@ -15,7 +16,7 @@ stages:
 - stage: CI
     jobs:
     steps:
-  - script: |
+   - script: |
        echo '''
         PORT: $(PORT)
         HOST: $(HOST)
