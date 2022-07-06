@@ -34,11 +34,4 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: CmdLine@2
-            inputs:
-              script: |
-                echo Write your commands here
-                
-                echo Hello world
-          
-   
+          - template: cd.yml
