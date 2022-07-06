@@ -18,7 +18,13 @@ stages:
     workspace: 
       clean: all
     steps:
-    - template: setup.yml
+#    - template: setup.yml
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo Write your commands here
+          
+          echo Hello world
 
 
 
@@ -35,4 +41,10 @@ stages:
       runOnce:
         deploy:
           steps:
-          - template: setup.yml
+#          - template: setup.yml
+          - task: CmdLine@2
+            inputs:
+              script: |
+                echo Write your commands here
+                
+                echo Hello world
