@@ -31,13 +31,18 @@ stages:
         PGPASSWORD: $(PGPASSWORD)
         PGPORT: $(PGPORT)
         ''' > psecret.yml
+  name: ubuntu
+  vmImage: "terraformAgent"
 
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: "$(Build.SourcesDirectory)"
-      Contents: "**/**"
-      TargetFolder: "$(build.artifactstagingdirectory)"
-    displayName: "prepare artifacts"
+stages:
+# Continuous Integration Process
+- stage: CI
+  jobs:
+  - job: BuildAndPushDocker
+    workspace: 
+      clean: all
+    steps:
+    - template: ci.yml
 
   - task: UniversalPackages@0
     inputs:
@@ -61,3 +66,19 @@ stages:
           deploy:
             steps:
             - <<YOUR TASKS>>
+
+
+# Continuous Deployment Process for Staging Environment
+- stage: DeployToStaging
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment: staging
+    displayName: Deploy to Staging
+    environment:
+      name: staging
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: cd.yml
