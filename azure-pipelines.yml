@@ -6,8 +6,8 @@ trigger:
 variables:
   - group: staging
 pool:
-  name: terraform_to_ci_cd
-  vmImage: "CI"
+  name: TERRAFORM_MASTER
+  vmImage: "terraformAgent"
 
 steps:
   - script: |
