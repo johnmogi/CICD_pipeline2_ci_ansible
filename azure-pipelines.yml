@@ -11,31 +11,6 @@ pool:
   vmImage: "terraformAgent"
 
 stages:
-
-# Continuous Integration Process
-- stage: CI
-    jobs:
-    steps:
-   - script: |
-       echo '''
-        PORT: $(PORT)
-        HOST: $(HOST)
-        HOST_URL: $(HOST_URL)
-        COOKIE_ENCRYPT_PWD: $(COOKIE_ENCRYPT_PWD)
-        NODE_ENV: $(NODE_ENV)
-        OKTA_ORG_URL: $(OKTA_ORG_URL)
-        OKTA_CLIENT_ID: $(OKTA_CLIENT_ID)
-        OKTA_CLIENT_SECRET: $(OKTA_CLIENT_SECRET)
-        PGHOST: $(PGHOST)
-        PGUSERNAME: $(PGUSERNAME)
-        PGDATABASE: $(PGDATABASE)
-        PGPASSWORD: $(PGPASSWORD)
-        PGPORT: $(PGPORT)
-        ''' > psecret.yml
-  name: ubuntu
-  vmImage: "terraformAgent"
-
-stages:
 # Continuous Integration Process
 - stage: CI
   jobs:
@@ -45,28 +20,6 @@ stages:
     steps:
     - template: ci.yml
 
-  - task: UniversalPackages@0
-    inputs:
-      command: "publish"
-      publishDirectory: "$(Build.ArtifactStagingDirectory)"
-      feedsToUsePublish: "internal"
-      vstsFeedPublish: "f3be00d4-d77a-40e2-a0a4-997840fa8608"
-      vstsFeedPackagePublish: "ci"
-      versionOption: "patch"
-
-  - stage: DeployToStaging
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-    jobs:
-    - deployment: staging
-      displayName: Deploy to Staging
-      environment:
-        name: <<YOUR ENVIRONMENT NAME>>
-        resourceType: VirtualMachine
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-            - <<YOUR TASKS>>
 
 
 # Continuous Deployment Process for Staging Environment
