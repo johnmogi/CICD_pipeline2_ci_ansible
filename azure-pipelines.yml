@@ -14,13 +14,10 @@ stages:
 # Continuous Integration Process
 - stage: CI
   jobs:
-        - job: Deploy
-          displayName: Deploy
-        - deployment: VMDeploy
-          displayName: web
+        - deployment: staging
+          displayName: Deploy to Staging
           variables:
           - group: staging
-
           environment:
             name:  'staging' 
             resourceType: VirtualMachine
