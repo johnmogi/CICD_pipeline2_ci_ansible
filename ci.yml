@@ -7,4 +7,4 @@ steps:
       feedsToUsePublish: "internal"
       vstsFeedPublish: "f3be00d4-d77a-40e2-a0a4-997840fa8608"
       vstsFeedPackagePublish: "ci"
-      versionOption: "patch"
+      versionOption: "patch" 
