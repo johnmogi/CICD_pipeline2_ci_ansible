@@ -1,8 +1,4 @@
 steps:
-    - name: build dir
-      file:
-        path: /home/adminuser/weightapp/
-        state: directory
 - task: Bash@3
   inputs:
     targetType: 'inline'
