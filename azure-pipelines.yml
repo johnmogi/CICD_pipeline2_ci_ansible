@@ -20,17 +20,23 @@ stages:
 
 
 
-# Continuous Deployment Process for Production Environment
-- stage: DeployToProd
+- stage: Deploy_to_Production
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
   jobs:
-  - deployment: production
-    displayName: Deploy to Production
-    environment:
-      name: production
-      resourceType: VirtualMachine
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-      - template: cd.yml
+        - job: Deploy
+          displayName: Deploy
+        - deployment: VMDeploy
+          displayName: web
+          variables:
+          - group: Production
+
+          environment:
+            name:  'Production' #ApprovalRequired
+            resourceType: VirtualMachine
+            tags: 'Production'
+          strategy:
+          # default deployment strategy
+            runOnce:
+              deploy:
+                steps:
+                - template: deploy.yml
