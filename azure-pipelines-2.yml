@@ -33,11 +33,30 @@ stages:
     strategy:
       runOnce:
         deploy:
-          steps:
+          steps:          
           - task: CmdLine@2
             inputs:
               script: |
                 sudo apt update
-                sudo install docker.io
+                sudo apt upgrade -y
+                sudo apt install azure-cli -y
+                sudo apt install docker.io
+                sudo chmod 666 /var/run/docker.sock
+          - task: Docker@2
+            inputs:
+              containerRegistry: 'weightapprepo.azurecr.io'
+              command: 'login'
+          - task: Docker@2
+            inputs:
+              containerRegistry: 'weightapprepo.azurecr.io'
+              repository: 'weightapp'
+              command: 'buildAndPush'
+              Dockerfile: 'dockerfiles/Dockerfile'
+          - task: Docker@2
+            inputs:
+              containerRegistry: 'weightapprepo.azurecr.io'
+              repository: 'weightapp'
+              command: 'buildAndPush'
+              Dockerfile: '**/Dockerfile'
           
 
