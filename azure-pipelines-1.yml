@@ -54,3 +54,16 @@ stages :
               inputs:
                 targetType: 'inline'
                 script: 'uname -a'
+            - task: Docker@2
+              inputs:
+                containerRegistry: 'weightapprepo.azurecr.io'
+                command: 'login'
+
+            - task: Bash@3
+              inputs:
+                targetType: 'inline'
+                script: |
+                  docker pull weightapprepo.azurecr.io/weightapp:294
+                  
+                  
+                  docker images
