@@ -24,7 +24,6 @@ steps:
         TargetFolder: "$(build.artifactstagingdirectory)"
     displayName: "prepare artifacts"
   
-
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: '$(Pipeline.Workspace)'
