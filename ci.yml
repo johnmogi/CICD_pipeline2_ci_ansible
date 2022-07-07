@@ -46,3 +46,22 @@ steps:
       vstsFeedPublish: "f3be00d4-d77a-40e2-a0a4-997840fa8608"
       vstsFeedPackagePublish: "arti"
       versionOption: "patch"
+
+  - task: ExtractFiles@1
+    inputs:
+      archiveFilePatterns: "../**/*.tar"
+      destinationFolder: "ansible"
+      cleanDestinationFolder: true
+      overwriteExistingFiles: false
+
+  - script: rm -rf ~/ansible
+    displayName: Remove app
+  - script: mkdir -p ~/ansible/
+    displayName: Make directory app to ansible files directory
+  - checkout: AnsibleRepo
+    displayName: Download ansible files
+
+  - script: cp -R $(System.DefaultWorkingDirectory)/. ~/ansible/
+    displayName: Copy ansible files
+
+    #mv home/adminuser/azagent/_work/1/a* ~/ansible

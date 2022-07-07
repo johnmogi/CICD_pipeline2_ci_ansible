@@ -1,4 +1,34 @@
 iho27hl7h3zjx7kuel7bzniea7wttcwezyt4vifngubfrsicy5bq
 
 
+mkdir ~/ansible
 mv home/adminuser/azagent/_work/1/a* ~/ansible 
+
+
+  - script: |
+      ansible-playbook -i /home/adminuser/myagent/_work/1/s/ProductionInventory.ini /home/adminuser/myagent/_work/1/s/playbook.yaml --extra-vars "group=Production"
+    displayName: Ansible
+
+
+
+variables:
+- group: "compose-vars"
+
+pool: compose
+
+steps:
+- task: DockerCompose@0
+  inputs:
+    containerregistrytype: 'Azure Container Registry'
+    azureSubscription: 'Azure Pass - Sponsorship(4c91c978-76e8-4500-a93a-fed14688e040)'
+    azureContainerRegistry: '{"loginServer":"ben1213test.azurecr.io", "id" : "/subscriptions/4c91c978-76e8-4500-a93a-fed14688e040/resourceGroups/registry/providers/Microsoft.ContainerRegistry/registries/ben1213test"}'
+    dockerComposeFile: '**/docker-compose.yml'
+    dockerComposeFileArgs: |
+      HOST_URL = $(HOSTURL)
+      OKTA_ORG_URL = $(OKTA_URL)
+      OKTA_CLIENT_ID = $(OKTA_CLIENT)
+      OKTA_CLIENT_SECRET =$(OKTA_SECRET)
+      PGUSERNAME = $(PGUSER)
+      PGPASSWORD = $(PGPASS)
+    action: 'Run a Docker Compose command'
+    dockerComposeCommand: 'up'
