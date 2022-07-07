@@ -43,43 +43,6 @@ stages :
       runOnce:
         deploy:   
             steps:
-            - task: CopyFiles@2
-              inputs:
-                SourceFolder: "$(Build.SourcesDirectory)"
-                Contents: "**/**"
-                TargetFolder: "$(build.artifactstagingdirectory)"
-              displayName: "prepare artifacts"
-
-            - task: ArchiveFiles@2
-              inputs:
-                rootFolderOrFile: "$(Build.BinariesDirectory)"
-                includeRootFolder: true
-                archiveType: "tar"
-                archiveFile: "$(Build.ArtifactStagingDirectory)/artifact_ci.tar"
-                replaceExistingArchive: true
-
-            - task: PublishPipelineArtifact@1
-              inputs:
-                #  targetPath: '$(Pipeline.Workspace)'
-                targetPath: "$(Build.ArtifactStagingDirectory)/artifact_ci.tar"
-                artifact: "arti$(Build.BuildId)"
-                publishLocation: "pipeline"
-
-            - task: UniversalPackages@0
-              inputs:
-                command: "publish"
-                publishDirectory: "$(Build.ArtifactStagingDirectory)"
-                feedsToUsePublish: "internal"
-                vstsFeedPublish: "f3be00d4-d77a-40e2-a0a4-997840fa8608"
-                vstsFeedPackagePublish: "arti"
-                versionOption: "patch"
-
-            - task: ExtractFiles@1
-              inputs:
-                archiveFilePatterns: "../**/*.tar"
-                destinationFolder: "ansible"
-                cleanDestinationFolder: true
-                overwriteExistingFiles: false
             - task: DockerInstaller@0
               inputs:
                 dockerVersion: '17.09.0-ce'
@@ -92,4 +55,4 @@ stages :
                 containerRegistry: 'weightapprepo.azurecr.io'
                 repository: 'weightapp'
                 command: 'buildAndPush'
-                Dockerfile: 'dockerfiles/Dockerfile'
+                Dockerfile: '**/Dockerfile'
