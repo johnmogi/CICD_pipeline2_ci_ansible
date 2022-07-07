@@ -1,0 +1,34 @@
+trigger:
+  branches:
+    include:
+      - master
+
+pool:
+  name: default
+  vmImage: "john-Z370P-D3"
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "14.x"
+    displayName: "install node 14"
+
+  - script: |
+      npm install @hapi/hapi@19 @hapi/bell@12 @hapi/boom@9 @hapi/cookie@11 @hapi/inert@6 @hapi/joi@17 @hapi/vision@6 dotenv@8 ejs@3 postgres@1
+    displayName: "install dependencies"
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: "$(Build.SourcesDirectory)"
+      Contents: "**/**"
+      TargetFolder: "$(build.artifactstagingdirectory)"
+    displayName: "prepare artifacts"
+
+  - task: UniversalPackages@0
+    inputs:
+      command: "publish"
+      publishDirectory: "$(Build.ArtifactStagingDirectory)"
+      feedsToUsePublish: "internal"
+      vstsFeedPublish: "c6cf34b0-2e66-46e0-b9aa-c7577ad2de5f/9eb49bda-71fe-41a0-bde6-758a83b3f8f4"
+      vstsFeedPackagePublish: "arti$(Build.BuildId)"
+      versionOption: "patch"

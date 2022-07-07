@@ -7,7 +7,7 @@ trigger:
       - main
       - feature/*
 pool:
-  name: ubuntu
+  name: staging
   vmImage: "terraformAgent"
 
 stages:
