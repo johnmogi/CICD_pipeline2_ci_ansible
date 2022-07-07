@@ -20,10 +20,7 @@ stages :
 #           - task: DockerInstaller@0
 #             inputs:
 #               dockerVersion: '17.09.0-ce'
-#           - task: Bash@3
-#             inputs:
-#               targetType: 'inline'
-#               script: 'ls'
+
 #           - task: Docker@2
 #             inputs:
 #               containerRegistry: 'weightapprepo.azurecr.io'
@@ -46,10 +43,16 @@ stages :
       runOnce:
         deploy:   
             steps:
+            - task: DockerInstaller@0
+              inputs:
+                dockerVersion: '17.09.0-ce'
             - task: Docker@2
               inputs:
                 containerRegistry: 'weightapprepo.azurecr.io'
                 command: 'login'
-            - task: CmdLine@2
+            - task: Docker@2
               inputs:
-                script: 'whoami'
+                containerRegistry: 'weightapprepo.azurecr.io'
+                repository: 'weightapp'
+                command: 'buildAndPush'
+                Dockerfile: 'dockerfiles/Dockerfile'
