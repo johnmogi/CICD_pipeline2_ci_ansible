@@ -1,5 +1,4 @@
-variables:
-  - group: staging
+
 trigger:
   batch: true
   branches:
@@ -11,6 +10,7 @@ pool:
   vmImage: "terraformAgent"
 
 stages:
+
 # Continuous Integration Process
 - stage: CI
   jobs:
@@ -31,6 +31,7 @@ stages:
 
 # Continuous Delivery Process
 - stage: Deploy_to_Production
+
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
   jobs:
         - deployment: production
