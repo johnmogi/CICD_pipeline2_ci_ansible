@@ -23,13 +23,20 @@ steps:
       TargetFolder: "$(build.artifactstagingdirectory)"
     displayName: "prepare artifacts"
 
-  - task: DownloadPackage@1
-  inputs:
-    packageType: 'upack'
-      feed: '/f3be00d4-d77a-40e2-a0a4-997840fa8608'
-      view: 'b0454d3a-695d-440f-bb04-f7972c8072df'
-      definition: 'f4258cb0-bdb0-4e4a-8887-5706ee4e4575'
-  downloadPath: '$(System.ArtifactsDirectory)'
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: "$(Build.BinariesDirectory)"
+      includeRootFolder: true
+      archiveType: "tar"
+      archiveFile: "$(Build.ArtifactStagingDirectory)/artifact_ci.tar"
+      replaceExistingArchive: true
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      #  targetPath: '$(Pipeline.Workspace)'
+      targetPath: "$(Build.ArtifactStagingDirectory)/artifact_ci.tar"
+      artifact: "arti$(Build.BuildId)"
+      publishLocation: "pipeline"
 
   - task: UniversalPackages@0
     inputs:
