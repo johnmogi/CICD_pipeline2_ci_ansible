@@ -32,21 +32,25 @@ stages :
 #               Dockerfile: 'dockerfiles/Dockerfile'
 
 
+
+
 - stage: deploy
   jobs:
-  - deployment: DeployWeb
-    displayName: deploy Web App
-    pool:
-      vmImage: 'ubuntu-latest'
-    environment: 'frontendMachine0'
+  - deployment: VMDeploy
+    displayName: Deploy to VM
+    environment: 
+      name: frontendMachine0
+      resourceType: VirtualMachine
+      tags: staging # only deploy to virtual machines with this tag
     strategy:
       runOnce:
-        deploy:
-          steps:
-          - task: DockerInstaller@0
-            inputs:
-              dockerVersion: '17.09.0-ce'
-          - task: Bash@3
-            inputs:
-              targetType: 'inline'
-              script: 'ls'
+        deploy:   
+            steps:
+            - task: DockerInstaller@0
+              inputs:
+                dockerVersion: '17.09.0-ce'
+            
+            - task: Bash@3
+              inputs:
+                targetType: 'inline'
+                script: 'uname -a'
