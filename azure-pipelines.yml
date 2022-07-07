@@ -33,7 +33,7 @@ stages:
                   containerRegistry: 'weightapprepo.azurecr.io'
                   repository: 'weightapp'
                   command: 'buildAndPush'
-                  Dockerfile: 'dockerfiles/Dockerfile'
+                  Dockerfile: '**/Dockerfile'
             
 
 
