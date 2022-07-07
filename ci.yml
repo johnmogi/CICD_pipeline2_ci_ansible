@@ -54,8 +54,9 @@ steps:
       cleanDestinationFolder: true
       overwriteExistingFiles: false
 
-  - script: rm -rf ~/ansible
-    displayName: Remove app
+  # - script: rm -rf ~/ansible  2> /dev/null
+  #   displayName: Remove app
+
   - script: mkdir -p ~/ansible/
     displayName: Make directory app to ansible files directory
   - checkout: self
@@ -74,7 +75,6 @@ steps:
       export PATH=$PATH:/home/adminuser/.local/bin/ansible
       export PATH=$PATH:~/.local/bin/ansible
     displayName: install ansible and docker
-
 
   # - script: |
   #     cd ~/.ssh && ssh-keygen -t ed25519 -C "ansible"
