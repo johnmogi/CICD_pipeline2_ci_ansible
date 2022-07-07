@@ -31,6 +31,14 @@ steps:
       artifact: 'arti$(Build.BuildId)'
       publishLocation: 'pipeline'
 
+  - task: UniversalPackages@0
+    inputs:
+    command: 'publish'
+    publishDirectory: '$(Build.ArtifactStagingDirectory)'
+    feedsToUsePublish: 'internal'
+    vstsFeedPublish: 'f3be00d4-d77a-40e2-a0a4-997840fa8608'
+    vstsFeedPackagePublish: 'arti'
+    versionOption: 'patch'
 
   # - task: ArchiveFiles@2
   #   inputs:
