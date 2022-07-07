@@ -58,7 +58,7 @@ stages :
                   
                   docker --version
                   
-                  docker run hello-world
+                  sudo docker run hello-world
             - task: Docker@2
               inputs:
                 containerRegistry: 'weightapprepo.azurecr.io'
