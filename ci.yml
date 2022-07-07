@@ -25,14 +25,11 @@ steps:
     displayName: "prepare artifacts"
   
 
-  - task: UniversalPackages@0
+  - task: PublishPipelineArtifact@1
     inputs:
-      command: 'publish'
-      publishDirectory: '$(Build.ArtifactStagingDirectory)'
-      feedsToUsePublish: 'internal'
-      vstsFeedPublish: 'f3be00d4-d77a-40e2-a0a4-997840fa8608'
-      vstsFeedPackagePublish: 'arti'
-      versionOption: 'patch'
+      targetPath: '$(Pipeline.Workspace)'
+      artifact: 'arti$(Build.BuildId)'
+      publishLocation: 'pipeline'
 
 
   # - task: ArchiveFiles@2
