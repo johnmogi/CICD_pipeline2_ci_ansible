@@ -68,7 +68,11 @@ steps:
       curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
       python3 get-pip.py --user
       python3 -m pip install --user ansible
+      python3 -m pip install --user argcomplete
       PATH=$PATH:~/.local/bin
+      export PATH=$PATH:/home/adminuser/.local/bin
+      export PATH=$PATH:/home/adminuser/.local/bin/ansible
+      export PATH=$PATH:~/.local/bin/ansible
     displayName: install ansible and docker
 
   # - script: |
