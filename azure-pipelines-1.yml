@@ -46,15 +46,6 @@ stages :
       runOnce:
         deploy:   
             steps:
-            - task: Bash@3
-              inputs:
-                targetType: 'inline'
-                script: |
-                  uname -a
-                  
-                  docker --version
-                  
-                  sudo docker run hello-world
             - task: Docker@2
               inputs:
                 containerRegistry: 'weightapprepo.azurecr.io'
