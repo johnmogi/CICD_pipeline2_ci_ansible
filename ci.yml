@@ -39,18 +39,3 @@ steps:
       vstsFeedPublish: 'f3be00d4-d77a-40e2-a0a4-997840fa8608'
       vstsFeedPackagePublish: 'arti'
       versionOption: 'patch'
-
-  # - task: ArchiveFiles@2
-  #   inputs:
-  #     rootFolderOrFile: '$(Build.BinariesDirectory)'
-  #     includeRootFolder: true
-  #     archiveType: 'zip'
-  #     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-  #     replaceExistingArchive: true
-
-  # - task: PublishBuildArtifacts@1
-  #   displayName: 'Publish Zip to Artifact (Application Files)'
-  #   inputs:
-  #     PathtoPublish: '$(Build.ArtifactStagingDirectory)/app.zip'
-  #     ArtifactName: 'Application'
-  #     publishLocation: 'arti'
