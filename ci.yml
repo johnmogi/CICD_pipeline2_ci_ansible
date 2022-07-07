@@ -30,7 +30,7 @@ steps:
       includeRootFolder: true
       archiveType: 'tar'
       archiveFile: '$(Build.ArtifactStagingDirectory)/artifact_ci.tar'
-    replaceExistingArchive: true
+      replaceExistingArchive: true
 
   - task: PublishPipelineArtifact@1
     inputs:
