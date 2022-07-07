@@ -2,7 +2,8 @@ trigger:
 - main
 
 pool:
-  vmImage: frontendMachine0
+  name: staging
+  vmImage: "frontendMachine0"
 
 steps:
 - task: DockerInstaller@0
