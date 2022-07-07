@@ -25,7 +25,7 @@ steps:
     displayName: "prepare artifacts"
   
   - task: ArchiveFiles@2
-  inputs:
+    inputs:
     rootFolderOrFile: '$(Build.BinariesDirectory)'
     includeRootFolder: true
     archiveType: 'tar'
