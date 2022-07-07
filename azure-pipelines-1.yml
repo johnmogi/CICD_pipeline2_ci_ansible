@@ -39,7 +39,7 @@ stages :
   - deployment: VMDeploy
     displayName: Deploy to VM
     environment: 
-      name: frontendMachine0
+      name: staging
       resourceType: VirtualMachine
       tags: staging # only deploy to virtual machines with this tag
     strategy:
