@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: frontendmachine0
 
 steps:
 - task: DockerInstaller@0
@@ -18,3 +18,5 @@ steps:
     repository: 'weightapp'
     command: 'buildAndPush'
     Dockerfile: 'dockerfiles/Dockerfile'
+
+
