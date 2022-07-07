@@ -26,10 +26,10 @@ steps:
   
   - task: ArchiveFiles@2
     inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
-    includeRootFolder: true
-    archiveType: 'tar'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/artifact_ci.tar'
+      rootFolderOrFile: '$(Build.BinariesDirectory)'
+      includeRootFolder: true
+      archiveType: 'tar'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/artifact_ci.tar'
     replaceExistingArchive: true
 
   - task: PublishPipelineArtifact@1
