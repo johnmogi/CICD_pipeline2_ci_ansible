@@ -10,7 +10,7 @@ stages:
   - deployment: DeployWeb
     displayName: deploy Web App
     pool:
-      vmImage: 'Ubuntu-latest'
+      vmImage: 'ubuntu-latest'
     # creates an environment if it doesn't exist
     environment: 'frontendMachine0'
     strategy:
