@@ -1,0 +1,43 @@
+
+trigger:
+- main
+- feature/*
+pool:
+  vmImage: ubuntu-latest
+stages:
+
+# Continuous Integration Process
+- stage: CI
+  jobs:
+  - job: BuildAndPushDocker
+    workspace: 
+      clean: all
+    
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'weightapprepo.azurecr.io'
+        repository: 'weightapprepo'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+    
+    # Continuous Deployment Process for Staging Environment
+- stage: DeployToStaging
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment: staging
+    displayName: Deploy to Staging
+    environment:
+      name: staging
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: CmdLine@2
+            inputs:
+              script: |
+                sudo apt update
+                sudo install docker.io
+          
+
