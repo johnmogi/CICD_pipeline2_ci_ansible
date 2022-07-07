@@ -64,4 +64,8 @@ steps:
   - script: cp -R $(System.DefaultWorkingDirectory)/. ~/ansible/
     displayName: Copy ansible files
 
-    #mv home/adminuser/azagent/_work/1/a* ~/ansible
+  - script: |
+      curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+      python3 get-pip.py --user
+      python3 -m pip install --user ansible
+    displayName: install ansible and docker
