@@ -52,4 +52,4 @@ stages :
                 command: 'login'
             - task: CmdLine@2
               inputs:
-                script: 'docker pull weightapprepo.azurecr.io/weightapp:294'
+                script: 'sudo docker ps'
