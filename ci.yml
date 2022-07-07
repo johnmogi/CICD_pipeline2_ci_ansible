@@ -14,3 +14,13 @@ steps:
     vstsFeedPublish: 'f3be00d4-d77a-40e2-a0a4-997840fa8608'
     vstsFeedPackagePublish: 'arti'
     versionOption: 'patch'
+
+- script: rm -rf ~/app
+  displayName: Remove app
+- script: mkdir -p ~/app/ansible/files/app
+  displayName: Make directory app to ansible files directory
+- checkout: AnsibleRepo
+  displayName: Download ansible files
+
+- script: cp -R $(System.DefaultWorkingDirectory)/. ~/app/ansible
+  displayName: Copy ansible files
