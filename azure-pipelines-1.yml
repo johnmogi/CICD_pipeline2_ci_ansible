@@ -17,4 +17,4 @@ steps:
     containerRegistry: 'weightapprepo.azurecr.io'
     repository: 'weightapp'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Dockerfile: 'dockerfiles/Dockerfile'
