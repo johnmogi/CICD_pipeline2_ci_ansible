@@ -85,7 +85,7 @@ steps:
       stagvm1 ansible_host=10.0.20.4 ansible_port=22 ansible_user=adminuser ansible_password=Y6nGLfR7Dw9m
       stagvm1 ansible_host=10.0.20.5 ansible_port=22 ansible_user=adminuser ansible_password=Y6nGLfR7Dw9m
       """ > hosts
-    displayName: make hosts file
+    displayName: make hosts file 2
 
   # - script: |
   #     cd ~/.ssh && ssh-keygen -t ed25519 -C "ansible"
