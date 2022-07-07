@@ -29,7 +29,7 @@ steps:
       targetPath: '$(Pipeline.Workspace)'
       artifact: 'arti$(Build.BuildId)'
       publishLocation: 'pipeline'
-
+ 
   - task: UniversalPackages@0
     inputs:
       command: 'publish'
