@@ -58,7 +58,7 @@ steps:
     displayName: Remove app
   - script: mkdir -p ~/ansible/
     displayName: Make directory app to ansible files directory
-  - checkout: AnsibleRepo
+  - checkout: self
     displayName: Download ansible files
 
   - script: cp -R $(System.DefaultWorkingDirectory)/. ~/ansible/
