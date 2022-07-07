@@ -4,14 +4,40 @@ trigger:
 
 pool:
   vmImage: "ubuntu-latest"
-stages:
+  
+stages :
+# - stage: Build
+#   jobs:
+#   - deployment: Build
+#     displayName: Build Web App
+#     pool:
+#       vmImage: 'ubuntu-latest'
+
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - task: DockerInstaller@0
+#             inputs:
+#               dockerVersion: '17.09.0-ce'
+#           - task: Bash@3
+#             inputs:
+#               targetType: 'inline'
+#               script: 'ls'
+#           - task: Docker@2
+#             inputs:
+#               containerRegistry: 'weightapprepo.azurecr.io'
+#               repository: 'weightapp'
+#               command: 'buildAndPush'
+#               Dockerfile: 'dockerfiles/Dockerfile'
+
+
 - stage: deploy
   jobs:
   - deployment: DeployWeb
     displayName: deploy Web App
     pool:
       vmImage: 'ubuntu-latest'
-    # creates an environment if it doesn't exist
     environment: 'frontendMachine0'
     strategy:
       runOnce:
@@ -24,11 +50,3 @@ stages:
             inputs:
               targetType: 'inline'
               script: 'ls'
-          - task: Docker@2
-            inputs:
-              containerRegistry: 'weightapprepo.azurecr.io'
-              repository: 'weightapp'
-              command: 'buildAndPush'
-              Dockerfile: 'dockerfiles/Dockerfile'
-
-
