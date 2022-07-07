@@ -1,4 +1,4 @@
-FROM node:14-alpine3.16
+FROM node:14
 RUN mkdir -p /home/app/node_modules && chown -R node:node /home/app
 
 WORKDIR /home/app
