@@ -23,9 +23,10 @@ RUN echo -e "\
     PGPORT=5432 n\
     " > .env
 
+COPY package*.json ./
+
 RUN npm install
 
-# RUN npm run initdb
+CMD [ "npm", "run", "initdb" ]
 
-#Start the app
-CMD ["npm", "run","dev"] 
+ENTRYPOINT [ "npm", "run", "dev" ]
