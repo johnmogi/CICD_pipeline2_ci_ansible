@@ -6,7 +6,7 @@ pool:
   vmImage: ubuntu-latest
 stages:
   # Continuous Integration Process
-  - stage: pre-CI
+  - stage: prepare_CI
     jobs:
       - job: BuildAndPushDocker
         workspace:
