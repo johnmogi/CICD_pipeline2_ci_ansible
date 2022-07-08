@@ -49,9 +49,3 @@ stages:
           - task: CmdLine@2
             inputs:
               script: 'docker pull weightapprepo.azurecr.io/weightapprepo:$(tag)'
-
-          - task: CmdLine@2
-            inputs:
-              script: 'docker images'
-
-
