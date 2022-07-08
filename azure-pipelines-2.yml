@@ -3,7 +3,8 @@ trigger:
   - feature/*
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: staging
+  # vmImage: ubuntu-latest
 stages:
   # Continuous Integration Process
   - stage: prepare_CI
