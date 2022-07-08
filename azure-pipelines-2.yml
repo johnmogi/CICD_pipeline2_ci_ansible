@@ -59,3 +59,7 @@ stages:
           - task: CmdLine@2
             inputs:
               script: 'docker pull weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)'
+
+          - task: CmdLine@2
+            inputs:
+              script: 'docker run -d -p 8080:8080 weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)'
