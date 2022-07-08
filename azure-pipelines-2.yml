@@ -62,7 +62,7 @@ stages:
                 - task: CmdLine@2
                   inputs:
                     script: |
-                      docker run -d -p 8080:8080 --name weightapp weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
+                      docker run -d -p 8080:8080  --restart=always --name weightapp -e HOST=$(HOST) -e PORT=$(PORT) -e PGHOST=$(PGHOST) -e PGUSERNAME=$(PGUSERNAME) -e PGDATABASE=$(PGDBNAME) -e PGPASSWORD=$(PGPASS) -e COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) -e OKTA_ORG_URL=$(OKTAURL) -e OKTA_CLIENT_ID=$(OKTACLIENT) -e OKTA_CLIENT_SECRET=$(OKTASECRET) weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
                   displayName: docker run and restart
   - stage: CD_to_production
     condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
@@ -95,12 +95,11 @@ stages:
                     script: |
                       docker rmi -f $(docker images -a -q)
                       docker rm -f $(docker ps -a -q)
-
                       docker pull weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
                   displayName: clean and repull docker image
 
                 - task: CmdLine@2
                   inputs:
                     script: |
-                      docker run -d -p 8080:8080 --name weightapp weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
+                      docker run -d -p 8080:8080  --restart=always --name weightapp -e HOST=$(HOST) -e PORT=$(PORT) -e PGHOST=$(PGHOST) -e PGUSERNAME=$(PGUSERNAME) -e PGDATABASE=$(PGDBNAME) -e PGPASSWORD=$(PGPASS) -e COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) -e OKTA_ORG_URL=$(OKTAURL) -e OKTA_CLIENT_ID=$(OKTACLIENT) -e OKTA_CLIENT_SECRET=$(OKTASECRET) weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
                   displayName: docker run and restart
