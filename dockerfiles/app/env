@@ -1,7 +1,7 @@
 PORT=8080
 HOST=0.0.0.0
 NODE_ENV=development
-HOST_URL=http://20.121.218.223:8080
+HOST_URL=http://20.25.35.7:8080
 COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
 
 # Okta configuration
