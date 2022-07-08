@@ -8,7 +8,7 @@ COPY ./app /home/app
 ENV port=8080
 EXPOSE 8080
 
-RUN mv env .env
+# RUN mv env .env
 
 RUN npm install
 
