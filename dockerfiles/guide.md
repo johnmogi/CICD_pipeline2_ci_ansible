@@ -88,3 +88,4 @@ docker push new-repo:weightapp
 docker run weightapp:1.0.0-p 8080:8080
 docker run weightapp:1.0.0 -p 8080
 
+docker start  `docker ps -q -l`
