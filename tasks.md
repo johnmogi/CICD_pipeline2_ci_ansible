@@ -1,3 +1,2 @@
-1. fix templates
-2. pass var
-3. deploy
+variables not working
+docker not starting
