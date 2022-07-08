@@ -50,7 +50,7 @@ stages:
                 - task: CmdLine@2
                   inputs:
                     script: |
-                      docker rmi $(docker images -a -q)
+                      docker rmi -f $(docker images -a -q)
                       docker rm -f $(docker ps -a -q)
                       docker pull weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
                   displayName: clean and repull docker image
@@ -58,6 +58,6 @@ stages:
                 - task: CmdLine@2
                   inputs:
                     script: |
-                      docker run -d -p 8080:8080 -e PORT=$(PORT) weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
-                      docker restart weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
+                      docker run -d -p 8080:8080 -e PORT=$(PORT) --name weightapp weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
+                      docker restart weightapp
                   displayName: docker run and restart
