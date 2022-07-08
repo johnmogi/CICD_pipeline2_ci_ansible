@@ -57,4 +57,7 @@ stages:
 
                 - task: CmdLine@2
                   inputs:
-                    script: "docker run -d -p 8080:8080 -e PORT=$(PORT) weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)"
+                    script: |
+                      docker run -d -p 8080:8080 -e PORT=$(PORT) weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
+                      docker restart weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
+                  displayName: docker run and restart
