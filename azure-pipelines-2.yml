@@ -52,6 +52,6 @@ stages:
 
           - task: CmdLine@2
             inputs:
-              script: 'docker run weightapprepo.azurecr.io/weightapprepo:$(tag) -d -p 8080:8080'
+              script: 'docker run -p -d 8080:8080 weightapprepo.azurecr.io/weightapprepo:$(tag)'
 
 
