@@ -21,11 +21,11 @@ RUN echo -e "\
     PGDATABASE=postgres n\
     PGPASSWORD=5pSi8DJ7yk8f n\
     PGPORT=5432 n\
-" > .env
+    " > .env
 
 RUN npm install
 
-RUN npm run initdb
+# RUN npm run initdb
 
 #Start the app
 CMD ["npm", "run","dev"] 
