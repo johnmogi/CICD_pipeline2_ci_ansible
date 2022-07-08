@@ -45,17 +45,10 @@ stages:
             inputs:
               containerRegistry: 'weightapprepo.azurecr.io'
               command: 'login'
-          - task: Docker@2
+          
+          - task: CmdLine@2
             inputs:
-              containerRegistry: 'weightapprepo.azurecr.io'
-              repository: 'weightapp'
-              command: 'buildAndPush'
-              Dockerfile: 'dockerfiles/Dockerfile'
-          - task: Docker@2
-            inputs:
-              containerRegistry: 'weightapprepo.azurecr.io'
-              repository: 'weightapp'
-              command: 'buildAndPush'
-              Dockerfile: '**/Dockerfile'
+              script: 'docker pull weightapprepo.azurecr.io/weightapprepo:346'
+
           
 
