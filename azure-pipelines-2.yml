@@ -29,7 +29,7 @@ stages:
       - deployment: staging
         displayName: Deploy to Staging
         environment:
-          name: production #!
+          name: staging
           resourceType: VirtualMachine
         strategy:
           runOnce:
