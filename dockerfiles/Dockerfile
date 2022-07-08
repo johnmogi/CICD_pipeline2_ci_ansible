@@ -3,6 +3,7 @@ RUN mkdir -p /home/app/node_modules && chown -R node:node /home/app
 
 WORKDIR /home/app
 COPY . /home/app
+# COPY package*.json /home/app
 
 ENV port=8080
 EXPOSE 8080
@@ -23,7 +24,6 @@ RUN echo -e "\
     PGPORT=5432 n\
     " > .env
 
-COPY package*.json ./
 
 RUN npm install
 
