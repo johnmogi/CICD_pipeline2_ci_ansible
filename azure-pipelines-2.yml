@@ -63,5 +63,4 @@ stages:
                   inputs:
                     script: |
                       docker run -d -p 8080:8080 --name weightapp weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
-                      cat .env
                   displayName: docker run and restart
