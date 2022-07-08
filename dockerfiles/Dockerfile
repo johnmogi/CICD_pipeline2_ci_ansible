@@ -8,7 +8,7 @@ ENV port=8080
 EXPOSE 8080
 
 RUN npm install
-RUN npm run initdb
+# RUN npm run initdb
 
 #Start the app
 CMD ["npm", "run","dev"]
