@@ -1,63 +1,53 @@
 trigger:
-  batch: true
-  branches:
-    include:
-      - main
-      - feature/*
+  - main
+  - feature/*
 pool:
-  name: ubuntu
-  vmImage: "terraformAgent"
-resources:
-- repo: self
+  vmImage: ubuntu-latest
 stages:
   # Continuous Integration Process
   - stage: CI
     jobs:
+      - job: BuildAndPushDocker
+        workspace:
+          clean: all
+
+        steps:
+          - task: Docker@2
+            inputs:
+              containerRegistry: "weightapprepo.azurecr.io"
+              repository: "weightapprepo"
+              command: "buildAndPush"
+              Dockerfile: "**/Dockerfile"
+
+        # Continuous Deployment Process for Staging Environment
+  - stage: DeployToStaging
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
+    jobs:
       - deployment: staging
         displayName: Deploy to Staging
-        variables:
-          - group: staging
         environment:
-          name: "staging"
+          name: staging
           resourceType: VirtualMachine
-          tags: "staging"
         strategy:
-          # default deployment strategy
           runOnce:
             deploy:
               steps:
-              - task: DockerInstaller@0
-                inputs:
-                  dockerVersion: '17.09.0-ce'
-              - task: Bash@3
-                inputs:
-                  targetType: 'inline'
-                  script: 'ls'
-              - task: Docker@2
-                inputs:
-                  containerRegistry: 'weightapprepo.azurecr.io'
-                  repository: 'weightapp'
-                  command: 'buildAndPush'
-                  Dockerfile: '**/Dockerfile'
-            
+                - task: CmdLine@2
+                  inputs:
+                    script: |
+                      sudo apt update
+                      sudo apt upgrade -y
+                      sudo apt install docker.io -y
+                      sudo chmod 666 /var/run/docker.sock
+                - task: Docker@2
+                  inputs:
+                    containerRegistry: "weightapprepo.azurecr.io"
+                    command: "login"
 
+                - task: CmdLine@2
+                  inputs:
+                    script: "docker pull weightapprepo.azurecr.io/weightapprepo:$(tag)"
 
-
-  # Continuous Delivery Process
-  - stage: Deploy_to_Production
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-    jobs:
-      - deployment: production
-        displayName: Deploy to Production
-        variables:
-          - group: Production
-        environment:
-          name: "Production" #ApprovalRequired
-          resourceType: VirtualMachine
-          tags: "Production"
-        strategy:
-          # default deployment strategy
-          runOnce:
-            deploy:
-              steps:
-                - template: cd.yml
+                - task: CmdLine@2
+                  inputs:
+                    script: "docker run -p -d 8080:8080 weightapprepo.azurecr.io/weightapprepo:latest"
