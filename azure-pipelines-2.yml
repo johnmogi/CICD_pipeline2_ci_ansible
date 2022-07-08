@@ -25,7 +25,7 @@ stages:
               Dockerfile: "**/Dockerfile"
               tags: $(Build.BuildId)
 
-  - stage: CI to staging
+  - stage: CI_to_staging
     condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
     variables:
       - group: staging
