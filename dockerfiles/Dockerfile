@@ -12,7 +12,7 @@ RUN echo -e "\
     PORT=8080 n\
     HOST=0.0.0.0 n\
     NODE_ENV=development n\
-    HOST_URL=http://168.61.44.255:8080 n\
+    HOST_URL=http://20.25.35.7:8080 n\
     COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong! n\
     OKTA_ORG_URL=https://dev-96311573.okta.com n\
     OKTA_CLIENT_ID=0oa57uv2e4ZbMvc8b5d7 n\
