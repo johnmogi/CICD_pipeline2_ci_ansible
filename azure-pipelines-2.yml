@@ -20,6 +20,7 @@ stages:
         repository: 'weightapprepo'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+        tags: $(Build.BuildId)
     
     # Continuous Deployment Process for Staging Environment
 - stage: DeployToStaging
