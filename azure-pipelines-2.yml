@@ -49,9 +49,10 @@ stages:
 
                 - task: CmdLine@2
                   inputs:
+                    
                     script: |
-                    docker rmi $(docker images -a -q)
-                    docker pull weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
+                        docker rmi $(docker images -a -q)
+                        docker pull weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
                   displayName: clean and repull docker image
 
                 - task: CmdLine@2
