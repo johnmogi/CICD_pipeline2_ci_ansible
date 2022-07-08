@@ -2,6 +2,15 @@
 trigger:
 #- main
 - feature/*
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'c44b4083-3bb0-49c1-b47d-974e53cbdf3c'
+  imageRepository: 'weightapprepo'
+  containerRegistry: 'weightapprepo.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
+  
 pool:
   vmImage: ubuntu-latest
 stages:
