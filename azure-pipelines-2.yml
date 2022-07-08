@@ -9,24 +9,6 @@ stages:
   # Continuous Integration Process
   - stage: prepare_CI
     jobs:
-      - job: BuildAndPushDocker
-        workspace:
-          clean: all
-
-        steps:
-          - task: Docker@2
-            inputs:
-              containerRegistry: "weightapprepo.azurecr.io"
-              repository: "weightapprepo"
-              command: "buildAndPush"
-              Dockerfile: "**/Dockerfile"
-              tags: $(Build.BuildId)
-
-  - stage: CI
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
-    variables:
-      - group: staging
-    jobs:
       - deployment: staging
         displayName: Deploy to Staging
         environment:
