@@ -1,6 +1,6 @@
 
 trigger:
-- main
+#- main
 - feature/*
 pool:
   vmImage: ubuntu-latest
@@ -52,6 +52,6 @@ stages:
 
           - task: CmdLine@2
             inputs:
-              script: 'docker run -p -d 8080:8080 weightapprepo.azurecr.io/weightapprepo:latest'
+              script: 'docker images'
 
 
