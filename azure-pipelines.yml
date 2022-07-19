@@ -1,5 +1,5 @@
 trigger:
-  - main
+  - master
   - feature/*
 
 pool:
@@ -56,6 +56,7 @@ stages:
                     script: |
                       docker rmi -f $(docker images -a -q)
                       docker rm -f $(docker ps -a -q)
+                      # security bug fix below:
                       docker pull weightapprepo.azurecr.io/weightapprepo:$(Build.BuildId)
                   displayName: clean and repull docker image
 

@@ -1,5 +1,18 @@
 # CICD_pipeline2_ci_ansible
  
+
+
+Project Overview This week’s project consists of using Azure Pipelines to configure a complete CI/CD pipeline for the WeightTracker application that includes building the application and deploying it into (an existent) infrastructure. As a bonus we are going to create an additional CI/CD pipeline to automate the infrastructure updates when our Terraform code changes.
+
+feature branch merge instruction
+hello and welcome to the world of CI CD
+
+make sure you update the correct values in the library:
+
+will run over the required steps tp install application configuration over your server fleet. I hope you enjoy the experience.
+
+renamed master to main then back again (:
+
 renamed master to main
 list repos:
 this = https://github.com/johnmogi/CICD_pipeline1_IAc_plan-files
