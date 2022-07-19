@@ -4,7 +4,7 @@
 
 Project Overview This week’s project consists of using Azure Pipelines to configure a complete CI/CD pipeline for the WeightTracker application that includes building the application and deploying it into (an existent) infrastructure. As a bonus we are going to create an additional CI/CD pipeline to automate the infrastructure updates when our Terraform code changes.
 
-[docker ci cd](/docker-cicd.png)
+[![docker ci cd](/docker-cicd.png)]
 
 feature branch merge instruction
 hello and welcome to the world of CI CD
